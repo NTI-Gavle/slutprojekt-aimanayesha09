@@ -1,8 +1,4 @@
 <?php
-/**
- * Startsida - Flöde med alla inlägg
- */
-
 $pageTitle = 'Flöde';
 require_once '../includes/header.php';
 require_once '../database/user_queries.php';
@@ -10,8 +6,6 @@ require_once '../database/user_queries.php';
 $currentUser = getCurrentUser();
 $posts = getAllPosts();
 $flash = getFlashMessage();
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post'])) {
     if (!isLoggedIn()) {
         redirect('login.php');

@@ -1,10 +1,17 @@
 <?php
+/**
+ * Navigationsmeny
+ */
+
+// Se till att functions.php är laddad
+require_once dirname(__DIR__) . '/includes/functions.php';
+
 $currentUser = getCurrentUser();
 ?>
 <nav class="navbar">
     <div class="container nav-container">
         <a href="index.php" class="logo">
-            <span class="logo-icon"></span>
+            <span class="logo-icon">💬</span>
             <span>Mini Forum</span>
         </a>
         
