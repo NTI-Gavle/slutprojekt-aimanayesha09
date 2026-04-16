@@ -1,25 +1,51 @@
 <?php
-require_once __DIR__ . '/../config/env.php';
+/**
+ * Databasanslutning med PDO
+ */
 
-// Load the .env file
-$env = loadEnv(__DIR__ . '/../.env');
-
-
-$dbname = 'Your_DB_Name';
-$hostname = 'localhost';
-
-$DB_USER = $env['DB_USER'] ?? 'root';
-$DB_PASSWORD = $env['DB_PASS']?? 'root';
-
-try {
-    $dbconn = new PDO(
-        "mysql:host=$hostname;dbname=$dbname;charset=utf8mb4",
-        $DB_USER,
-        $DB_PASSWORD
-    );
-    echo 'Connected to database'; // Remove after it works
-    $dbconn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Ladda konfiguration - testa olika sökvägar
+$envPath = dirname(__DIR__) . 'env.php';
+if (file_exists($envPath)) {
+    require_once $envPath;
+} else {
+    // Om filen inte hittas, definiera konstanter direkt
+    define('DB_HOST', 'localhost');
+    define('DB_NAME', 'mini_forum');
+    define('DB_USER', 'root');
+    define('DB_PASS', 'root');
+    define('DB_CHARSET', 'utf8mb4');
 }
-catch(PDOException $e){
-    echo 'Connection failed: ' . $e->getMessage();
+
+class Database {
+    private static $instance = null;
+    private $connection;
+
+    private function __construct() {
+        try {
+            $dsn = "mysql:host=" . DB_HOST . ";localhost=" . DB_NAME . ";mini_forum=" . DB_CHARSET;
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+            $this->connection = new PDO($dsn, DB_USER, DB_PASS, $options);
+        } catch (PDOException $e) {
+            die("Databasfel: " . $e->getMessage());
+        }
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function getConnection() {
+        return $this->connection;
+    }
+}
+
+function getDB() {
+    return Database::getInstance()->getConnection();
 }
