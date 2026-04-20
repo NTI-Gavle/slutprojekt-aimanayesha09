@@ -28,8 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include '../includes/nav.php'; ?>
-
 <main>
     <div class="container">
         <div class="form-container">
@@ -74,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </form>
                 
                 <div class="form-footer">
-                    Har du inget konto? <a href="register.php">Registrera dig</a>
+                    Har du inget konto? <a href="registering.php">Registrera dig</a>
                 </div>
             </div>
         </div>

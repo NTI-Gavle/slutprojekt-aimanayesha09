@@ -42,8 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
 }
 ?>
 
-<?php include '../includes/nav.php'; ?>
-
 <main>
     <div class="container">
        

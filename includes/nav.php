@@ -32,7 +32,7 @@ $currentUser = getCurrentUser();
                 <a href="logout.php" class="btn btn-secondary">Logga ut</a>
             <?php else: ?>
                 <a href="login.php" class="btn btn-secondary">Logga in</a>
-                <a href="register.php" class="btn btn-primary">Registrera</a>
+                <a href="registering.php" class="btn btn-primary">Registrera</a>
             <?php endif; ?>
         </div>
     </div>

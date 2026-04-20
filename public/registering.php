@@ -38,8 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php include '../includes/nav.php'; ?>
-
 <main>
     <div class="container">
         <div class="form-container">
