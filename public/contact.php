@@ -35,32 +35,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h2>Contact Us</h2>
+<main>
+    <div class="container content-page">
+        <h2>Contact Us</h2>
 
-<?php if ($success): ?>
-    <p class="success-message">Thank you! Your message has been sent.</p>
-<?php endif; ?>
+        <?php if ($success): ?>
+            <p class="success-message">Thank you! Your message has been sent.</p>
+        <?php endif; ?>
 
-<?php if ($errors): ?>
-    <ul class="error-messages">
-        <?php foreach ($errors as $error): ?>
-            <li><?= htmlspecialchars($error) ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+        <?php if ($errors): ?>
+            <ul class="error-messages">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= htmlspecialchars($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
 
-<form action="contact.php" method="post" class="contact-form">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" value="<?= htmlspecialchars($name) ?>">
+        <form action="contact.php" method="post" class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="<?= htmlspecialchars($name) ?>">
 
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" value="<?= htmlspecialchars($email) ?>">
 
-    <label for="message">Message:</label>
-    <textarea name="message" id="message"><?= htmlspecialchars($message) ?></textarea>
+            <label for="message">Message:</label>
+            <textarea name="message" id="message"><?= htmlspecialchars($message) ?></textarea>
 
-    <button type="submit">Send</button>
-</form>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</main>
 
 <?php
 require_once __DIR__ . '/../includes/footer.php';
