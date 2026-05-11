@@ -72,3 +72,12 @@ function deletePost($postId, $userId, $isAdmin) {
     return $stmt->execute([$postId]);
 }
 
+function deleteAllPosts($isAdmin) {
+    if (!$isAdmin) {
+        return false;
+    }
+
+    $db = getDB();
+    $stmt = $db->prepare("DELETE FROM posts");
+    return $stmt->execute();
+}

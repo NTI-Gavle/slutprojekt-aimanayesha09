@@ -25,6 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_post'])) {
     redirect('index.php');
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_all_posts'])) {
+    if (!isLoggedIn()) {
+        redirect('login.php');
+    }
+
+    if (deleteAllPosts($currentUser['is_admin'])) {
+        setFlashMessage('success', 'Alla inlägg har raderats!');
+    } else {
+        setFlashMessage('error', 'Du har inte behörighet att radera alla inlägg.');
+    }
+    redirect('index.php');
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
     if (!isLoggedIn()) {
@@ -55,6 +68,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_post'])) {
             <?php if ($flash): ?>
                 <div class="alert alert-<?php echo $flash['type']; ?>">
                     <?php echo $flash['message']; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($currentUser && $currentUser['is_admin']): ?>
+                <div class="admin-panel">
+                    <div>
+                        <h3>Admin</h3>
+                        <p>Du kan radera enskilda inlägg eller hela flödet.</p>
+                    </div>
+                    <form method="POST" action="" onsubmit="return confirm('Vill du verkligen radera alla inlägg?');">
+                        <button type="submit" name="delete_all_posts" class="btn btn-danger">
+                            Radera alla inlägg
+                        </button>
+                    </form>
                 </div>
             <?php endif; ?>
             
